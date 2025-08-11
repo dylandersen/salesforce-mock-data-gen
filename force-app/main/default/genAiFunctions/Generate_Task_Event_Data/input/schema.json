@@ -1,0 +1,28 @@
+{
+  "required" : [ "recordId", "activityCount", "industry" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordId" : {
+      "title" : "recordId",
+      "description" : "The Record ID to generate tasks and events for (Account, Opportunity, Case, etc.). This should be extracted from the user's context or request.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "activityCount" : {
+      "title" : "activityCount",
+      "description" : "The number of activities (tasks and events) to generate (e.g., 3, 5, 10). Extract this from user phrases like 'Generate 5 activities', 'Create 3 tasks', 'Make 8 activities'.",
+      "lightning:type" : "lightning__numberType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "industry" : {
+      "title" : "industry",
+      "description" : "The industry type for generating relevant activities (e.g., 'automotive', 'healthcare', 'fintech', 'retail', 'manufacturing', 'luxury hotels'). Extract this from user phrases like 'automotive industry', 'healthcare sector', 'fintech activities'.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

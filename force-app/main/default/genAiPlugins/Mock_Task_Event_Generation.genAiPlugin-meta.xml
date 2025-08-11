@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>User requests to generate, create, or add mock task and event data, sample activities, demo task/event records, or activity records for Salesforce records (Account, Opportunity, Case, etc.) in any specified industry.</description>
+    <developerName>Mock_Task_Event_Generation</developerName>
+    <genAiFunctions>
+        <functionName>Generate_Task_Event_Data</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>When users request activity generation for any record, always use the Generate_Task_Event_Data action. Extract the record ID from context, the number of activities from the user&apos;s request (e.g., &quot;5 activities&quot;, &quot;3 tasks&quot;, &quot;8 events&quot;), and the industry type (e.g., &quot;automotive&quot;, &quot;healthcare&quot;, &quot;fintech&quot;). Never attempt to create activities manually.</description>
+        <developerName>instruction_0_activity_generation</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_activity_generation</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user doesn&apos;t specify how many activities to generate, default to 6 activities. If no industry is specified, ask the user to clarify what industry the activities should be relevant to. Always confirm successful creation by stating the number of activities created and the industry they represent.</description>
+        <developerName>instruction_1_activity_defaults</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_activity_defaults</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>For requests like &quot;create activities&quot;, &quot;generate tasks and events&quot;, &quot;add sample activities&quot;, &quot;create mock task data&quot;, &quot;generate X activities in Y industry&quot;, &quot;make tasks for the automotive industry&quot;, or &quot;create events for this account&quot;, immediately call Generate_Task_Event_Data with the current record context, extracted activity count, and specified industry.</description>
+        <developerName>instruction_2_trigger_phrases</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_trigger_phrases</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>The generated activities will include a realistic mix of tasks and events with industry-relevant subjects, professional descriptions, appropriate status/priority settings, and realistic dates. Tasks will include follow-ups, calls, emails, and other actions. Events will include meetings, calls, and appointments with proper timing and locations. All activities will be automatically associated with the specified record.</description>
+        <developerName>instruction_3_activity_details</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_activity_details</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Mock Task Event Generation</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Generate realistic mock Task and Event records with AI-powered industry-relevant data for Salesforce records. Create professional activities with appropriate subjects, descriptions, dates, and settings for any specified industry for testing, training, and demonstration purposes.</scope>
+</GenAiPlugin>

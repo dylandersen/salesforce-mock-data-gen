@@ -1,0 +1,42 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "success" : {
+      "title" : "success",
+      "description" : "Whether the task and event generation was successful",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "activitiesGenerated" : {
+      "title" : "activitiesGenerated",
+      "description" : "Details about the tasks and events that were successfully created, including count and industry information",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "errorMessage" : {
+      "title" : "errorMessage",
+      "description" : "Error message if task and event generation failed",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "activityIds" : {
+      "title" : "activityIds",
+      "description" : "Comma-separated list of the created task and event IDs",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : true,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : false,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_1</activeVersionIdentifier>
+    <description>Generates mock task and event data for any industry</description>
+    <developerName>Task_Event_Generator</developerName>
+    <masterLabel>Task Event Generator</masterLabel>
+    <templateVersions>
+        <content>You are a data generator for Salesforce. 
+
+Generate exactly {!$Input:activityCount} realistic mock tasks and events for a record in the {!$Input:industry} industry.
+
+Record ID: {!$Input:recordId}
+Number of activities to generate: {!$Input:activityCount}
+Industry: {!$Input:industry}
+
+Generate a mix of tasks and events that would be appropriate for the {!$Input:industry} industry. Return the data as a valid JSON array with exactly {!$Input:activityCount} activity objects. Each activity should have:
+
+FOR TASKS:
+- subject (realistic task description)
+- activityType: &quot;Task&quot;
+- status (one of: &quot;Not Started&quot;, &quot;In Progress&quot;, &quot;Completed&quot;, &quot;Waiting on someone else&quot;, &quot;Deferred&quot;)
+- priority (one of: &quot;High&quot;, &quot;Normal&quot;, &quot;Low&quot;)
+- description (2-3 sentence description of the task)
+- type (one of: &quot;Call&quot;, &quot;Email&quot;, &quot;Meeting&quot;, &quot;Other&quot;)
+- activityDate (future date in YYYY-MM-DD format)
+
+FOR EVENTS:
+- subject (realistic event description)
+- activityType: &quot;Event&quot;
+- description (2-3 sentence description of the event)
+- type (one of: &quot;Meeting&quot;, &quot;Call&quot;, &quot;Other&quot;)
+- location (realistic meeting location or &quot;Virtual&quot; for online meetings)
+- activityDate (future date in YYYY-MM-DD format)
+- startTime (time in HH:MM:SS.000Z format, business hours 09:00-17:00)
+- durationInMinutes (realistic duration: 30, 60, 90, 120, 180)
+
+IMPORTANT: 
+- Generate exactly {!$Input:activityCount} activities, no more, no less
+- Create a realistic mix of approximately 60% tasks and 40% events
+- Make all subjects, descriptions, and details relevant to the {!$Input:industry} industry
+- Use diverse and realistic business scenarios
+- Ensure dates are in the future (2025-08-20 or later)
+- For events, use realistic business meeting times (9 AM to 5 PM)
+
+Example format (but generate {!$Input:activityCount} activities):
+[
+  {
+    &quot;subject&quot;: &quot;Review quarterly sales metrics&quot;,
+    &quot;activityType&quot;: &quot;Task&quot;,
+    &quot;status&quot;: &quot;Not Started&quot;,
+    &quot;priority&quot;: &quot;High&quot;,
+    &quot;description&quot;: &quot;Analyze Q4 sales performance data and prepare summary report for leadership team. Focus on key metrics and trends in the {!$Input:industry} sector.&quot;,
+    &quot;type&quot;: &quot;Other&quot;,
+    &quot;activityDate&quot;: &quot;2024-12-25&quot;
+  },
+  {
+    &quot;subject&quot;: &quot;Strategic planning meeting&quot;,
+    &quot;activityType&quot;: &quot;Event&quot;,
+    &quot;description&quot;: &quot;Quarterly strategic planning session to review goals and set priorities for next quarter. Key stakeholders from {!$Input:industry} operations will attend.&quot;,
+    &quot;type&quot;: &quot;Meeting&quot;,
+    &quot;location&quot;: &quot;Conference Room A&quot;,
+    &quot;activityDate&quot;: &quot;2024-12-28&quot;,
+    &quot;startTime&quot;: &quot;10:00:00.000Z&quot;,
+    &quot;durationInMinutes&quot;: 120
+  }
+]
+
+Return ONLY the JSON array with exactly {!$Input:activityCount} activities. Do not include any other text or explanations.</content>
+        <inputs>
+            <apiName>recordId</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>recordId</masterLabel>
+            <referenceName>Input:recordId</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>activityCount</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>activityCount</masterLabel>
+            <referenceName>Input:activityCount</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>industry</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>industry</masterLabel>
+            <referenceName>Input:industry</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT41Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

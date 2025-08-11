@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_1</activeVersionIdentifier>
+    <activeVersionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_3</activeVersionIdentifier>
     <description>Generates mock contact data for any industry</description>
     <developerName>Contact_Generator</developerName>
     <masterLabel>Contact Generator</masterLabel>
@@ -14,40 +14,33 @@ Number of contacts to generate: {!$Input:contactCount}
 Industry: {!$Input:industry}
 
 Generate contact data that would be appropriate for the {!$Input:industry}industry. Return the data as a valid JSON array with exactly {!$Input:contactCount} contact objects. Each contact should have:
-- firstName (realistic first name - use DIVERSE names from different cultural backgrounds, avoid common names like Michael, John, Emily, Sarah)
-- lastName (realistic last name - use DIVERSE surnames from different cultural backgrounds) 
+- firstName (realistic first name)
+- lastName (realistic last name) 
 - title (job title relevant to {!$Input:industry} industry)
 - phone (realistic phone number format)
 - email (realistic email address)
 - mailingStreet (street address)
 - mailingCity (city name)
-- mailingStateCode (state/province - use 2-letter state codes like CA, TX, NY, FL)
+- mailingState (state/province)
 - mailingPostalCode (postal code)
-- mailingCountryCode (country - use 2-letter country codes like US, CA, GB, AU)
+- mailingCountry (country)
 - description (2-3 sentence professional description relevant to {!$Input:industry})
 
-IMPORTANT: 
-- Generate exactly {!$Input:contactCount} contacts, no more, no less
-- Make all job titles, descriptions, and professional backgrounds relevant to the {!$Input:industry} industry
-- Use UNIQUE and DIVERSE names - no two contacts should have the same first name or last name
-- Include names from various cultural backgrounds (e.g., Hispanic, Asian, African, European, Middle Eastern, etc.)
-- Avoid overused names like Michael, John, Emily, Sarah, David, Jessica, Chris, Jennifer
-- Examples of diverse names: Aaliyah, Dmitri, Priya, Alejandro, Kenji, Amara, Finn, Zara, Rashid, Lucia
-- IMPORTANT: Use only valid 2-letter state codes (CA, TX, NY, FL, IL, PA, OH, etc.) and 2-letter country codes (US, CA, GB, AU, etc.) that exist in Salesforce picklists
+IMPORTANT: Generate exactly {!$Input:contactCount} contacts, no more, no less. Make all job titles, descriptions, and professional backgrounds relevant to the {!$Input:industry} industry.
 
 Example format (but generate {!$Input:contactCount} contacts):
 [
  {
- &quot;firstName&quot;: &quot;Zara&quot;,
- &quot;lastName&quot;: &quot;Patel&quot;, 
+ &quot;firstName&quot;: &quot;Sarah&quot;,
+ &quot;lastName&quot;: &quot;Johnson&quot;, 
  &quot;title&quot;: &quot;[Industry-relevant job title]&quot;,
  &quot;phone&quot;: &quot;(555) 123-4567&quot;,
- &quot;email&quot;: &quot;zara.patel@example.com&quot;,
- &quot;mailingStreet&quot;: &quot;123 Business Ave&quot;,
- &quot;mailingCity&quot;: &quot;Austin&quot;,
- &quot;mailingStateCode&quot;: &quot;TX&quot;, 
- &quot;mailingPostalCode&quot;: &quot;78701&quot;,
- &quot;mailingCountryCode&quot;: &quot;US&quot;,
+ &quot;email&quot;: &quot;sarah.johnson@example.com&quot;,
+ &quot;mailingStreet&quot;: &quot;123 Business Ave&quot;,
+ &quot;mailingCity&quot;: &quot;Austin&quot;,
+ &quot;mailingState&quot;: &quot;Texas&quot;, 
+ &quot;mailingPostalCode&quot;: &quot;78701&quot;,
+ &quot;mailingCountry&quot;: &quot;United States&quot;,
  &quot;description&quot;: &quot;[2-3 sentences describing their role and experience in the {!$Input:industry} industry]&quot;
  }
 ]
@@ -78,6 +71,81 @@ Return ONLY the JSON array with exactly {!$Input:contactCount} contacts. Do not 
         <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
         <status>Published</status>
         <versionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a data generator for Salesforce. 
+
+Generate exactly {!$Input:contactCount} realistic mock contacts for an account in the {!$Input:industry} industry.
+
+Account ID: {!$Input:accountId}
+Number of contacts to generate: {!$Input:contactCount}
+Industry: {!$Input:industry}
+
+Generate contact data that would be appropriate for the {!$Input:industry}industry. Return the data as a valid JSON array with exactly {!$Input:contactCount} contact objects. Each contact should have:
+- firstName (realistic first name - use DIVERSE names from different cultural backgrounds, avoid common names like Michael, John, Emily, Sarah)
+- lastName (realistic last name - use DIVERSE surnames from different cultural backgrounds) 
+- title (job title relevant to {!$Input:industry} industry)
+- phone (realistic phone number format)
+- email (realistic email address)
+- mailingStreet (street address)
+- mailingCity (city name)
+- mailingStateCode (state/province - use 2-letter state codes like CA, TX, NY, FL)
+- mailingPostalCode (postal code)
+- mailingCountryCode (country - use 2-letter country codes like US, CA, GB, AU)
+- description (2-3 sentence professional description relevant to {!$Input:industry})
+
+IMPORTANT: 
+- Generate exactly {!$Input:contactCount} contacts, no more, no less
+- Make all job titles, descriptions, and professional backgrounds relevant to the {!$Input:industry} industry
+- Use UNIQUE and DIVERSE names - no two contacts should have the same first name or last name
+- Include names from various cultural backgrounds (e.g., Hispanic, Asian, African, European, Middle Eastern, etc.)
+- Avoid overused names like Michael, John, Emily, Sarah, David, Jessica, Chris, Jennifer
+- Examples of diverse names: Aaliyah, Dmitri, Priya, Alejandro, Kenji, Amara, Finn, Zara, Rashid, Lucia
+- IMPORTANT: Use only valid 2-letter state codes (CA, TX, NY, FL, IL, PA, OH, etc.) and 2-letter country codes (US, CA, GB, AU, etc.) that exist in Salesforce picklists
+
+Example format (but generate {!$Input:contactCount} contacts):
+[
+ {
+ &quot;firstName&quot;: &quot;Zara&quot;,
+ &quot;lastName&quot;: &quot;Patel&quot;, 
+ &quot;title&quot;: &quot;[Industry-relevant job title]&quot;,
+ &quot;phone&quot;: &quot;(555) 123-4567&quot;,
+ &quot;email&quot;: &quot;zara.patel@example.com&quot;,
+ &quot;mailingStreet&quot;: &quot;123 Business Ave&quot;,
+ &quot;mailingCity&quot;: &quot;Austin&quot;,
+ &quot;mailingStateCode&quot;: &quot;TX&quot;, 
+ &quot;mailingPostalCode&quot;: &quot;78701&quot;,
+ &quot;mailingCountryCode&quot;: &quot;US&quot;,
+ &quot;description&quot;: &quot;[2-3 sentences describing their role and experience in the {!$Input:industry} industry]&quot;
+ }
+]
+
+Return ONLY the JSON array with exactly {!$Input:contactCount} contacts. Do not include any other text
+</content>
+        <inputs>
+            <apiName>accountId</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>accountId</masterLabel>
+            <referenceName>Input:accountId</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>contactCount</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>contactCount</masterLabel>
+            <referenceName>Input:contactCount</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>industry</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>industry</masterLabel>
+            <referenceName>Input:industry</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT41Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_3</versionIdentifier>
     </templateVersions>
     <type>einstein_gpt__flex</type>
     <visibility>Global</visibility>

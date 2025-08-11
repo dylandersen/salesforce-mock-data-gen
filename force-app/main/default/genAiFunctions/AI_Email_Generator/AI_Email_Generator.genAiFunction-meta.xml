@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Use this action when users request to generate mock email data, sample email histories, or demo email conversations for Account or Opportunity records. This action creates realistic EmailMessage records with AI-generated content that tells a coherent business story over time. 
+
+Call this action when users say things like:
+- &quot;Create emails for this record&quot;
+- &quot;Generate mock email history&quot; 
+- &quot;Add sample emails to this account&quot;
+- &quot;Create email conversations&quot;
+- &quot;Generate demo email data&quot;
+
+The action will automatically determine the appropriate number of emails, business context, and timeline based on the user&apos;s natural language request.</description>
+    <invocationTarget>AI_Email_Generator</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <masterLabel>AI Email Generator</masterLabel>
+    <progressIndicatorMessage>Generating realistic email conversations with AI ...</progressIndicatorMessage>
+</GenAiFunction>

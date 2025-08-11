@@ -1,42 +1,42 @@
 {
-  "unevaluatedProperties": false,
-  "properties": {
-    "success": {
-      "title": "success",
-      "description": "Whether the contact generation was successful",
-      "lightning:type": "lightning__booleanType",
-      "lightning:isPII": false,
-      "copilotAction:isDisplayable": false,
-      "copilotAction:isUsedByPlanner": true,
-      "copilotAction:useHydratedPrompt": false
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "success" : {
+      "title" : "success",
+      "description" : "Whether the contact generation was successful",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
     },
-    "contactsGenerated": {
-      "title": "contactsGenerated", 
-      "description": "Details about the contacts that were successfully created, including count and industry information",
-      "lightning:type": "lightning__textType",
-      "lightning:isPII": false,
-      "copilotAction:isDisplayable": true,
-      "copilotAction:isUsedByPlanner": true,
-      "copilotAction:useHydratedPrompt": false
+    "contactsGenerated" : {
+      "title" : "contactsGenerated",
+      "description" : "Details about the contacts that were successfully created, including count and industry information",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
     },
-    "errorMessage": {
-      "title": "errorMessage",
-      "description": "Error message if contact generation failed",
-      "lightning:type": "lightning__textType", 
-      "lightning:isPII": false,
-      "copilotAction:isDisplayable": true,
-      "copilotAction:isUsedByPlanner": true,
-      "copilotAction:useHydratedPrompt": false
+    "errorMessage" : {
+      "title" : "errorMessage",
+      "description" : "Error message if contact generation failed",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
     },
-    "contactIds": {
-      "title": "contactIds",
-      "description": "Comma-separated list of the created contact IDs",
-      "lightning:type": "lightning__textType",
-      "lightning:isPII": true,
-      "copilotAction:isDisplayable": false,
-      "copilotAction:isUsedByPlanner": false,
-      "copilotAction:useHydratedPrompt": false
+    "contactIds" : {
+      "title" : "contactIds",
+      "description" : "Comma-separated list of the created contact IDs",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : true,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : false,
+      "copilotAction:useHydratedPrompt" : false
     }
   },
-  "lightning:type": "lightning__objectType"
+  "lightning:type" : "lightning__objectType"
 }

@@ -1,0 +1,28 @@
+{
+  "required" : [ "recordId", "recordType", "userRequest" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordId" : {
+      "title" : "recordId",
+      "description" : "The 18-character Salesforce record ID of the Account or Opportunity that the generated EmailMessage records should be associated with. This links the mock emails to the specific business record.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "recordType" : {
+      "title" : "recordType",
+      "description" : "The Salesforce object type of the record to associate emails with. Must be 'Account' or 'Opportunity'. This determines how the EmailMessage records will be linked to the business record.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "userRequest" : {
+      "title" : "userRequest",
+      "description" : "The user's natural language request describing what kind of mock emails to generate, including number of emails, timeframe, personas, and business context. \n\nExamples: 'Create 5 emails showing a B2B deal progression' or 'Generate 3 emails with Bobby Gibbs over 6 months'",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -12,5 +12,6 @@
     "**/Thumbs.db": true,
     ".mule": true
   },
-  "salesforcedx-vscode-core.show-cli-success-msg": false
+  "salesforcedx-vscode-core.show-cli-success-msg": false,
+  "salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
 }

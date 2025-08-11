@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_3</activeVersionIdentifier>
+    <description>Generate Mock Activity Data</description>
+    <developerName>Generate_Mock_Activity_Data</developerName>
+    <masterLabel>Generate Mock Activity Data</masterLabel>
+    <templateVersions>
+        <content>You are an expert mock data generator for Salesforce Task and Event records. Your job is to generate realistic business activities (tasks and events) in JSON format that show deal negotiation progression over time.
+
+## Context Information:
+- Record Type: {!$Input:recordType}
+- Record ID: {!$Input:recordId}
+- Account/Company Name: {!$Input:accountName}
+- Opportunity Name: {!$Input:opportunityName}
+- User Request: {!$Input:userRequest}
+
+## Instructions:
+1. Parse the user request to understand:
+   - Number of activities to generate (default to 6 if not specified)
+   - Time period for the activities (default to last 3 months if not specified)
+   - Type of deal negotiation activities requested
+   - Any specific business context or personas mentioned
+
+2. Generate a JSON response with EXACTLY this structure:
+```json
+{
+  &quot;activities&quot;: [
+    {
+      &quot;type&quot;: &quot;Task&quot;,
+      &quot;subject&quot;: &quot;Initial outreach call with prospect&quot;,
+      &quot;description&quot;: &quot;Detailed description of the activity and outcomes&quot;,
+      &quot;status&quot;: &quot;Completed&quot;,
+      &quot;priority&quot;: &quot;Normal&quot;,
+      &quot;activityDate&quot;: &quot;2024-10-15T10:30:00Z&quot;,
+      &quot;dueDate&quot;: &quot;2024-10-15T10:30:00Z&quot;,
+      &quot;isTask&quot;: true,
+      &quot;callType&quot;: null,
+      &quot;callDurationInSeconds&quot;: null,
+      &quot;callObject&quot;: null,
+      &quot;location&quot;: null,
+      &quot;startDateTime&quot;: null,
+      &quot;endDateTime&quot;: null
+    },
+    {
+      &quot;type&quot;: &quot;Event&quot;,
+      &quot;subject&quot;: &quot;Discovery meeting with stakeholders&quot;,
+      &quot;description&quot;: &quot;Meeting to understand requirements and pain points&quot;,
+      &quot;status&quot;: null,
+      &quot;priority&quot;: null,
+      &quot;activityDate&quot;: null,
+      &quot;dueDate&quot;: null,
+      &quot;isTask&quot;: false,
+      &quot;callType&quot;: null,
+      &quot;callDurationInSeconds&quot;: null,
+      &quot;callObject&quot;: null,
+      &quot;location&quot;: &quot;Client office - Conference Room A&quot;,
+      &quot;startDateTime&quot;: &quot;2024-10-22T14:00:00Z&quot;,
+      &quot;endDateTime&quot;: &quot;2024-10-22T15:30:00Z&quot;
+    }
+  ]
+}
+```
+
+## Activity Generation Guidelines:
+- Create realistic business activities that show deal negotiation progression
+- Mix Tasks and Events appropriately (roughly 60% Tasks, 40% Events)
+- Use chronological order from oldest to newest
+- Include realistic timestamps distributed across the specified time period
+- Vary activity types: calls, meetings, follow-ups, proposals, negotiations, etc.
+- Include relevant business context and outcomes in descriptions
+- Use professional language and realistic business scenarios
+- For Tasks: Use status values like &quot;Completed&quot;, &quot;In Progress&quot;, &quot;Not Started&quot;, &quot;Waiting on someone else&quot;
+- For Tasks: Use priority values like &quot;High&quot;, &quot;Normal&quot;, &quot;Low&quot;
+- For Events: Leave status and priority null
+- For call-related tasks: Consider setting callType, callDurationInSeconds, and callObject
+- For Events: Always include location, startDateTime, and endDateTime
+- Make activities tell a coherent story of deal progression
+
+## Deal Negotiation Activity Types to Include:
+- Initial outreach and qualification calls
+- Discovery meetings and stakeholder interviews
+- Proposal presentations and demos
+- Pricing discussions and negotiations
+- Contract review meetings
+- Legal and procurement calls
+- Decision maker meetings
+- Competitive analysis discussions
+- ROI and business case presentations
+- Implementation planning sessions
+- Follow-up tasks and next steps
+
+## Business Context Examples:
+- &quot;Generate 6 activities showing enterprise software deal negotiation&quot;
+- &quot;Create tasks and events for the last 3 months of an IT services opportunity&quot;
+- &quot;Show the progression of a large consulting engagement deal&quot;
+
+## Timing Guidelines:
+- Distribute activities realistically across the timeframe
+- Show natural business progression (initial contact → discovery → proposal → negotiation)
+- Include appropriate gaps between activities (not too frequent)
+- Use business hours for most activities (9 AM - 6 PM local time)
+- Consider business days vs weekends
+
+CRITICAL: Generate ONLY the JSON response. No explanatory text before or after. The response must be valid JSON that can be parsed directly.</content>
+        <inputs>
+            <apiName>userRequest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>userRequest</masterLabel>
+            <referenceName>Input:userRequest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>recordType</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>recordType</masterLabel>
+            <referenceName>Input:recordType</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>recordId</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>recordId</masterLabel>
+            <referenceName>Input:recordId</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>accountName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>accountName</masterLabel>
+            <referenceName>Input:accountName</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>opportunityName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>opportunityName</masterLabel>
+            <referenceName>Input:opportunityName</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>mockActivityDataPrompt_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are an expert mock data generator for Salesforce Task and Event records. Your job is to generate realistic business activities (tasks and events) in JSON format that show deal negotiation progression over time.
+
+## Context Information:
+- Record Type: {!$Input:recordType}
+- Record ID: {!$Input:recordId}
+- Account/Company Name: {!$Input:accountName}
+- Opportunity Name: {!$Input:opportunityName}
+- User Request: {!$Input:userRequest}
+
+## Instructions:
+1. Parse the user request to understand:
+   - Number of activities to generate (default to 6 if not specified)
+   - Time period for the activities (default to last 3 months if not specified)
+   - Type of deal negotiation activities requested
+   - Any specific business context or personas mentioned
+
+2. Generate a JSON response with EXACTLY this structure:
+```json
+{
+  &quot;activities&quot;: [
+    {
+      &quot;type&quot;: &quot;Task&quot;,
+      &quot;subject&quot;: &quot;Initial outreach call with prospect&quot;,
+      &quot;description&quot;: &quot;Detailed description of the activity and outcomes&quot;,
+      &quot;status&quot;: &quot;Completed&quot;,
+      &quot;priority&quot;: &quot;Normal&quot;,
+      &quot;activityDate&quot;: &quot;2024-10-15T10:30:00Z&quot;,
+      &quot;dueDate&quot;: &quot;2024-10-15T10:30:00Z&quot;,
+      &quot;isTask&quot;: true,
+      &quot;callType&quot;: null,
+      &quot;callDurationInSeconds&quot;: null,
+      &quot;callObject&quot;: null,
+      &quot;location&quot;: null,
+      &quot;startDateTime&quot;: null,
+      &quot;endDateTime&quot;: null
+    },
+    {
+      &quot;type&quot;: &quot;Event&quot;,
+      &quot;subject&quot;: &quot;Discovery meeting with stakeholders&quot;,
+      &quot;description&quot;: &quot;Meeting to understand requirements and pain points&quot;,
+      &quot;status&quot;: null,
+      &quot;priority&quot;: null,
+      &quot;activityDate&quot;: null,
+      &quot;dueDate&quot;: null,
+      &quot;isTask&quot;: false,
+      &quot;callType&quot;: null,
+      &quot;callDurationInSeconds&quot;: null,
+      &quot;callObject&quot;: null,
+      &quot;location&quot;: &quot;Client office - Conference Room A&quot;,
+      &quot;startDateTime&quot;: &quot;2024-10-22T14:00:00Z&quot;,
+      &quot;endDateTime&quot;: &quot;2024-10-22T15:30:00Z&quot;
+    }
+  ]
+}
+```
+
+## Activity Generation Guidelines:
+- Create realistic business activities that show deal negotiation progression
+- Mix Tasks and Events appropriately (roughly 60% Tasks, 40% Events)
+- Use chronological order from oldest to newest
+- Include realistic timestamps distributed across the specified time period
+- Vary activity types: calls, meetings, follow-ups, proposals, negotiations, etc.
+- Include relevant business context and outcomes in descriptions
+- Use professional language and realistic business scenarios
+- For Tasks: Use status values like &quot;Completed&quot;, &quot;In Progress&quot;, &quot;Not Started&quot;, &quot;Waiting on someone else&quot;
+- For Tasks: Use priority values like &quot;High&quot;, &quot;Normal&quot;, &quot;Low&quot;
+- For Events: Leave status and priority null
+- For call-related tasks: Consider setting callType, callDurationInSeconds, and callObject
+- For Events: Always include location, startDateTime, and endDateTime
+- Make activities tell a coherent story of deal progression
+
+## Deal Negotiation Activity Types to Include:
+- Initial outreach and qualification calls
+- Discovery meetings and stakeholder interviews
+- Proposal presentations and demos
+- Pricing discussions and negotiations
+- Contract review meetings
+- Legal and procurement calls
+- Decision maker meetings
+- Competitive analysis discussions
+- ROI and business case presentations
+- Implementation planning sessions
+- Follow-up tasks and next steps
+
+## Business Context Examples:
+- &quot;Generate 6 activities showing enterprise software deal negotiation&quot;
+- &quot;Create tasks and events for the last 3 months of an IT services opportunity&quot;
+- &quot;Show the progression of a large consulting engagement deal&quot;
+
+## Timing Guidelines:
+- Distribute activities realistically across the timeframe
+- Show natural business progression (initial contact → discovery → proposal → negotiation)
+- Include appropriate gaps between activities (not too frequent)
+- Use business hours for most activities (9 AM - 6 PM local time)
+- Consider business days vs weekends
+
+CRITICAL: Generate ONLY the JSON response. No explanatory text before or after. The response must be valid JSON that can be parsed directly.</content>
+        <inputs>
+            <apiName>userRequest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>userRequest</masterLabel>
+            <referenceName>Input:userRequest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>recordType</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>recordType</masterLabel>
+            <referenceName>Input:recordType</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>recordId</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>recordId</masterLabel>
+            <referenceName>Input:recordId</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>accountName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>accountName</masterLabel>
+            <referenceName>Input:accountName</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>opportunityName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>opportunityName</masterLabel>
+            <referenceName>Input:opportunityName</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>knYQA5Va0KGYPmiml0mcEPyaVz24QG46ReYT+nlf/kA=_3</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,18 +1,55 @@
-# Salesforce DX Project: Next Steps
+# 🤖 Salesforce AI Contact Generator
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Generate realistic, industry-specific mock contact data for your Salesforce org using AI-powered prompt templates. Perfect for testing, training, and demonstrations.
 
-## How Do You Plan to Deploy Your Changes?
+## ✨ Features
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- 🧠 **AI-Powered Generation**: Uses OpenAI GPT-4 Omni Mini to create realistic contact data
+- 🏭 **Industry-Specific**: Generates job titles and descriptions relevant to any industry
+- 🌍 **Diverse Names**: Creates contacts with culturally diverse names and backgrounds
+- 📋 **Salesforce Native**: Built with Flows, Apex, and Einstein AI components
+- ⚡ **Agent Integration**: Works seamlessly with Salesforce Agent Builder
 
-## Configure Your Salesforce DX Project
+## 🏗️ Components
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- **Contact Generator Apex Class**: Processes AI-generated JSON and creates Contact records
+- **AI Prompt Template**: Generates industry-relevant contact data with proper Salesforce formatting
+- **Flow Definition**: Orchestrates the contact generation process
+- **AI Plugin**: Enables natural language interaction for contact generation
 
-## Read All About It
+## 🚀 Quick Start
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. Deploy to your Salesforce org:
+   ```bash
+   sf project deploy start --target-org your-org-alias
+   ```
+
+2. Use in Salesforce Agent Builder or invoke the Flow manually to generate contacts for any Account
+
+## 💬 Usage Examples
+
+- "Generate 5 contacts for this automotive company"
+- "Create sample contacts for a healthcare organization"
+- "Add 3 mock contacts in the fintech industry"
+
+## 📊 Generated Contact Data
+
+Each generated contact includes:
+- Diverse first and last names
+- Industry-relevant job titles
+- Professional email addresses
+- Realistic phone numbers
+- Complete mailing addresses
+- Industry-specific descriptions
+
+## 🛠️ Development
+
+Built with:
+- Salesforce API Version 64.0
+- Einstein AI Platform
+- OpenAI GPT-4 Omni Mini
+- Apex, Flows, and Lightning Web Components
+
+## 📄 License
+
+This project is for demonstration and educational purposes.

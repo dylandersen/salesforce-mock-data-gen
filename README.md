@@ -7,7 +7,7 @@ This solution implements a comprehensive AI-powered mock data generation system 
 ```mermaid
 graph TD
     A[User Request] --> B[Agentforce Agent]
-    B --> C[GenAI Plugin Router]
+    B --> C[Agentforce Topic Router]
     
     C --> D1[Contact Generation Flow]
     C --> D2[Email Generation Flow]

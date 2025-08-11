@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>User requests to generate, create, or add mock contact data, sample contacts, demo contact records, or Contact records for Salesforce Account records in any specified industry.</description>
+    <developerName>Mock_Contact_Generation</developerName>
+    <genAiFunctions>
+        <functionName>Generate_Contact_Data</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>When users request contact generation for any account, always use the Generate_Contact_Data action. Extract the account ID from context, the number of contacts from the user&apos;s request (e.g., &quot;5 contacts&quot;, &quot;3 people&quot;), and the industry type (e.g., &quot;automotive&quot;, &quot;healthcare&quot;, &quot;fintech&quot;). Never attempt to create contacts manually.</description>
+        <developerName>instruction_0_contact_generation</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_contact_generation</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user doesn&apos;t specify how many contacts to generate, default to 4 contacts. If no industry is specified, ask the user to clarify what industry the contacts should be relevant to. Always confirm successful creation by stating the number of contacts created and the industry they represent.</description>
+        <developerName>instruction_1_contact_defaults</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_contact_defaults</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>For requests like &quot;create contacts&quot;, &quot;generate contacts for this account&quot;, &quot;add sample contacts&quot;, &quot;create mock contact data&quot;, &quot;generate X contacts in Y industry&quot;, or &quot;make contacts for the automotive industry&quot;, immediately call Generate_Contact_Data with the current account context, extracted contact count, and specified industry.</description>
+        <developerName>instruction_2_trigger_phrases</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_trigger_phrases</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>The generated contacts will have industry-relevant job titles, professional descriptions, realistic contact information, and mailing addresses. Each contact will be automatically associated with the specified account and include appropriate professional backgrounds for the requested industry sector.</description>
+        <developerName>instruction_3_contact_details</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_contact_details</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Mock Contact Generation</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Generate realistic mock Contact records with AI-powered industry-relevant data for Salesforce Account records. Create professional contacts with appropriate job titles, descriptions, and contact information for any specified industry for testing, training, and demonstration purposes.</scope>
+</GenAiPlugin>

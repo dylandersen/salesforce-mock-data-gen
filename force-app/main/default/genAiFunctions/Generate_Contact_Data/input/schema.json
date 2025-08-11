@@ -1,0 +1,28 @@
+{
+  "required": ["accountId", "contactCount", "industry"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "accountId": {
+      "title": "accountId",
+      "description": "The Account ID to generate contacts for. This should be extracted from the user's context or request.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": false
+    },
+    "contactCount": {
+      "title": "contactCount", 
+      "description": "The number of contacts to generate (e.g., 3, 5, 10). Extract this from user phrases like 'Generate 5 contacts', 'Create 3 people', 'Make 8 contacts'.",
+      "lightning:type": "lightning__numberType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    },
+    "industry": {
+      "title": "industry",
+      "description": "The industry type for generating relevant contacts (e.g., 'automotive', 'healthcare', 'fintech', 'retail', 'manufacturing', 'luxury hotels'). Extract this from user phrases like 'automotive industry', 'healthcare sector', 'fintech contacts'.",
+      "lightning:type": "lightning__textType", 
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

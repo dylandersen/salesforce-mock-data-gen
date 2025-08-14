@@ -2,7 +2,7 @@
 
 ## 🏗️ **System Architecture Overview**
 
-This solution implements a comprehensive AI-powered mock data generation system that integrates with Salesforce Agentforce to create realistic Contact, EmailMessage, Task, and Event records. The architecture follows a modular, event-driven design that leverages multiple Salesforce platform capabilities across three distinct data generation workflows.
+This solution implements a comprehensive AI-powered mock data generation system that integrates with Salesforce Agentforce to create realistic Contact, EmailMessage, Task, Event, Case, and Knowledge Article records. The architecture follows a modular, event-driven design that leverages multiple Salesforce platform capabilities across five distinct data generation workflows.
 
 ```mermaid
 graph TD
@@ -12,6 +12,8 @@ graph TD
     C --> D1[Contact Generation Flow]
     C --> D2[Email Generation Flow]
     C --> D3[Activity Generation Flow]
+    C --> D4[Case Generation Flow]
+    C --> D5[Knowledge Article Flow]
     
     subgraph "Contact Generation Pipeline"
         D1 --> E1[Contact Generator Prompt]
@@ -35,33 +37,63 @@ graph TD
         E3 --> F3[Activity Data Prompt]
         F3 --> G3[LLM Activity Processing]
         G3 --> H3[Activity JSON Response]
-        H3 --> I3[Activity Creator Apex]
+        H3 --> I3[TaskEventGenerator Apex]
         I3 --> J3[Task & Event Records]
+    end
+    
+    subgraph "Case Generation Pipeline"
+        D4 --> E4[Contact Context Retrieval]
+        E4 --> F4[Case Data Prompt]
+        F4 --> G4[LLM Case Processing]
+        G4 --> H4[Case JSON Response]
+        H4 --> I4[CaseGenerator Apex]
+        I4 --> J4[Case Records]
+    end
+    
+    subgraph "Knowledge Generation Pipeline"
+        D5 --> E5[Topic Area Context]
+        E5 --> F5[Knowledge Article Prompt]
+        F5 --> G5[LLM Knowledge Processing]
+        G5 --> H5[Knowledge JSON Response]
+        H5 --> I5[KnowledgeArticleGenerator Apex]
+        I5 --> J5[Knowledge Article Records]
     end
     
     I1 --> K[User Feedback]
     J2 --> K
     J3 --> K
+    J4 --> K
+    J5 --> K
     
     subgraph "AI Processing Layer"
         E1
         E2
         E3
+        E4
+        E5
         F1
         F2
         F3
+        F4
+        F5
         G1
         G2
         G3
+        G4
+        G5
         H1
         H2
         H3
+        H4
+        H5
     end
     
     subgraph "Salesforce Data Layer"
         I1
         J2
         J3
+        J4
+        J5
     end
     
     subgraph "Agentforce Integration"
@@ -94,19 +126,35 @@ graph TD
 - **Activity Generator Flow**: Coordinates Task and Event creation
 - **Opportunity Context Retrieval**: Gathers deal-specific metadata
 - **Activity Data Prompt**: Generates realistic business activity progressions
-- **Activity Creator Apex**: Task and Event record creation with relationships
+- **TaskEventGenerator Apex**: Task and Event record creation with relationships
 - **Deal Progression Logic**: Time-based activity sequencing
 
-### **5. AI Processing Layer**
+### **5. Case Generation Pipeline**
+- **Case Generator Flow**: Orchestrates customer support case creation
+- **Contact Context Retrieval**: Fetches customer context for AI enhancement
+- **Case Generator Prompt**: AI template for realistic support case scenarios
+- **CaseGenerator Apex**: JSON parsing and Case record creation with contact linking
+- **Industry-Specific Cases**: Context-aware support scenarios relevant to business type
+
+### **6. Knowledge Article Generation Pipeline**
+- **Knowledge Article Generator Flow**: Manages knowledge base content creation
+- **Topic Area Context**: Gathers subject matter context for AI enhancement
+- **Knowledge Article Generator Prompt**: Advanced template for comprehensive knowledge base articles
+- **KnowledgeArticleGenerator Apex**: Knowledge Article creation with rich HTML formatting
+- **Content Structure Intelligence**: Professional formatting with troubleshooting steps, common causes, and additional details
+
+### **7. AI Processing Layer**
 - **Multi-Template System**: Specialized prompts for each data type
 - **LLM Integration**: OpenAI GPT-4 Omni model processing across workflows
 - **JSON Response Handling**: Structured data format for consistent parsing
 - **Context-Aware Generation**: Business-relevant content based on record relationships
 
-### **6. Data Persistence Layer**
+### **8. Data Persistence Layer**
 - **Contact Object**: Standard Salesforce Contact records with Account relationships
 - **EmailMessage Object**: Email storage with proper threading and relationships
 - **Task & Event Objects**: Activity tracking with Account/Opportunity linkage
+- **Case Object**: Customer support cases with contact and account relationships
+- **Knowledge Article Object**: Rich knowledge base content with professional HTML formatting
 - **Record Relationships**: Comprehensive linking across all generated data
 - **Sharing & Security**: Leverages Salesforce security model across all objects
 
@@ -116,11 +164,11 @@ graph TD
 ```
 User Natural Language → Intent Classification → Data Type Routing → Context Extraction
 ```
-- **Data Type Detection**: "contacts", "emails", "activities" → Workflow routing
-- **Volume Understanding**: "5 contacts", "3 emails", "6 activities" → Count extraction
+- **Data Type Detection**: "contacts", "emails", "activities", "cases", "knowledge articles" → Workflow routing
+- **Volume Understanding**: "5 contacts", "3 emails", "6 activities", "4 cases", "2 knowledge articles" → Count extraction
 - **Time Period Parsing**: "last 3 months", "January to June" → Date range calculation
 - **Persona Recognition**: "Bobby Gibbs, CEO", "technology industry" → Character/context definition
-- **Scenario Mapping**: "B2B deal progression", "customer onboarding" → Business context
+- **Scenario Mapping**: "B2B deal progression", "customer onboarding", "support scenarios", "knowledge base topics" → Business context
 
 ### **Contact Generation Flow**
 ```
@@ -150,12 +198,32 @@ Opportunity Context + Request → Activity Prompt → LLM → Activity JSON → 
 - **Chronological Sequencing**: Time-based activity ordering showing business progression
 - **Outcome Documentation**: Realistic descriptions and next steps
 
+### **Case Generation Flow**
+```
+Contact Context + Industry → Case Prompt → LLM → Case JSON → Case Records
+```
+- **Customer Support Scenarios**: Industry-specific support cases reflecting real customer issues
+- **Contact Association**: Cases properly linked to existing contacts and accounts
+- **Case Classification**: Realistic mix of priorities, statuses, origins, and case types
+- **Support Channel Simulation**: Cases from various channels (Phone, Email, Web, Chat)
+
+### **Knowledge Article Generation Flow**
+```
+Topic Area + Industry → Knowledge Prompt → LLM → Knowledge JSON → Knowledge Article Records
+```
+- **Professional HTML Formatting**: Rich content with inline CSS and structured layout
+- **Content Structure**: Organized sections for troubleshooting steps, common causes, and additional details
+- **SEO-Friendly URLs**: Generated URL names optimized for knowledge base navigation
+- **Industry Contextualization**: Content relevant to specific business sectors and support scenarios
+
 ### **Cross-Pipeline Integration**
 ```
-Generated Contacts ↔ Email Generation ↔ Activity Generation
+Generated Contacts ↔ Email Generation ↔ Activity Generation ↔ Case Generation ↔ Knowledge Articles
 ```
 - **Contact-Email Linking**: Generated contacts can be referenced in email generation
 - **Activity-Contact Association**: Tasks and Events can reference generated contacts
+- **Case-Contact Integration**: Support cases linked to specific contacts and accounts
+- **Knowledge Base Support**: Articles provide resolution guidance for generated case scenarios
 - **Unified Business Narrative**: All generated data tells a cohesive business story
 
 ## 🎯 **Business Logic Architecture**
@@ -215,6 +283,42 @@ The system creates authentic business activities through:
    - Descriptions include realistic outcomes and next steps
    - Priority and status values align with business urgency
 
+### **Case Generation Intelligence**
+The system creates realistic customer support scenarios through:
+
+1. **Industry-Specific Issues**:
+   - Support cases reflect common problems in specific business sectors
+   - Case types include Questions, Problems, and Feature Requests
+   - Realistic case reasons (Installation, Performance, User Interface, Data Concerns)
+
+2. **Customer Service Authenticity**:
+   - Varied case priorities (High, Medium, Low) based on business impact
+   - Multiple contact channels (Phone, Email, Web, Chat) reflecting real customer behavior
+   - Progressive case statuses (New, Working, Escalated, Closed) showing support workflow
+
+3. **Contact Integration**:
+   - Cases properly linked to existing contacts and accounts
+   - Supplied contact information can override contact details for scenario variety
+   - Realistic customer names, emails, and phone numbers
+
+### **Knowledge Article Generation Intelligence**
+The system creates comprehensive knowledge base content through:
+
+1. **Professional Content Structure**:
+   - Rich HTML formatting with inline CSS for professional appearance
+   - Organized sections: Troubleshooting Steps, Common Causes, Additional Details
+   - SEO-friendly URL names for knowledge base navigation
+
+2. **Content Quality Standards**:
+   - 300-500 words per article with actionable guidance
+   - Professional styling with minimal colors and clear hierarchy
+   - Article metadata including timestamps and article IDs
+
+3. **Topic Area Expertise**:
+   - Content relevant to specific industries and topic areas
+   - Multiple article types (FAQ, How-To, Troubleshooting, Best Practice)
+   - Data categorization for knowledge base organization
+
 ### **Multi-Data Type Architecture**
 ```
 Contact Generation:
@@ -234,6 +338,18 @@ Activity Progression:
 ├── Discovery Events (Meetings, calls)
 ├── Proposal Activities (Presentations, demos)
 └── Negotiation Tasks (Contract review, decision)
+
+Case Support Workflow:
+├── Initial Case (Customer issue reporting)
+├── Investigation Cases (Technical support scenarios)
+├── Escalation Cases (Complex problem resolution)
+└── Resolution Cases (Closed with solution documentation)
+
+Knowledge Base Structure:
+├── FAQ Articles (Common questions and answers)
+├── How-To Articles (Step-by-step guidance)
+├── Troubleshooting Articles (Problem resolution guides)
+└── Best Practice Articles (Optimization recommendations)
 ```
 
 ## 🔧 **Technical Architecture Decisions**
@@ -314,6 +430,18 @@ Activity Generation Examples:
 ├── "Create tasks and events for Q4 opportunity progression"
 ├── "Add meeting activities with key stakeholders"
 └── "Show 3 months of deal progression activities"
+
+Case Generation Examples:
+├── "Create 4 support cases for this contact in the healthcare industry"
+├── "Generate customer service cases with various priorities"
+├── "Add technical support cases for software issues"
+└── "Create escalated cases showing problem resolution workflow"
+
+Knowledge Article Generation Examples:
+├── "Generate 3 knowledge articles for technical support topics"
+├── "Create troubleshooting guides for the financial services industry"
+├── "Add how-to articles for product onboarding"
+└── "Generate FAQ articles with professional HTML formatting"
 ```
 
 ### **Unified Feedback Loop**
@@ -323,16 +451,22 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 
 ### **Cross-Data Type Integration**
 ```
-"Create 3 contacts and 5 emails for this account" → Parallel Processing → Unified Results
+"Create 3 contacts, 5 emails, 4 cases, and 2 knowledge articles for this account" → Parallel Processing → Unified Results
 ```
 
 ## 🎯 **Expected Outcomes & Benefits**
 
 ### **For Sales Teams**
-- **Demo Enhancement**: Complete business context with realistic contacts, email histories, and activity progressions
+- **Demo Enhancement**: Complete business context with realistic contacts, email histories, activity progressions, and support case scenarios
 - **Training Scenarios**: Practice conversations with diverse personas across full sales cycles
 - **Pipeline Visualization**: Complete deal progression stories with contacts, communications, and activities
 - **Relationship Mapping**: Realistic contact hierarchies and communication patterns
+
+### **For Customer Service Teams**
+- **Support Training**: Realistic case scenarios with industry-specific customer issues
+- **Knowledge Base Development**: Professional articles with troubleshooting guides and FAQs
+- **Case Management**: Practice with varied case types, priorities, and resolution workflows
+- **Agent Onboarding**: Comprehensive support scenarios for new agent training
 
 ### **For Marketing Teams**
 - **Campaign Testing**: Realistic customer journey sequences with contacts and email interactions
@@ -341,7 +475,7 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 - **Journey Mapping**: Full customer lifecycle with touchpoints and activities
 
 ### **For Developers**
-- **Test Data Generation**: Comprehensive datasets across Contacts, EmailMessages, Tasks, and Events
+- **Test Data Generation**: Comprehensive datasets across Contacts, EmailMessages, Tasks, Events, Cases, and Knowledge Articles
 - **Integration Testing**: Multi-object dependent features with rich, interconnected data
 - **Demo Environments**: Compelling showcases with complete business scenarios
 - **Performance Testing**: Realistic data volumes across all standard objects
@@ -386,16 +520,18 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 ## 🏆 **Success Metrics**
 
 ### **Technical Success Indicators**
-- **Response Time**: < 30 seconds for mixed data type generation (5 contacts + 3 emails + 6 activities)
+- **Response Time**: < 30 seconds for mixed data type generation (5 contacts + 3 emails + 6 activities + 4 cases + 2 knowledge articles)
 - **Success Rate**: > 95% successful record creation across all data types
-- **Data Quality**: AI-generated content passes business review across contacts, emails, and activities
-- **Cross-Pipeline Integration**: Seamless data relationships between generated contacts, emails, and activities
-- **User Adoption**: Active usage across sales, marketing, and demo scenarios
+- **Data Quality**: AI-generated content passes business review across contacts, emails, activities, cases, and knowledge articles
+- **Cross-Pipeline Integration**: Seamless data relationships between generated contacts, emails, activities, cases, and knowledge articles
+- **User Adoption**: Active usage across sales, marketing, customer service, and demo scenarios
 
 ### **Data Type Specific Metrics**
 - **Contact Generation**: > 90% realistic industry-appropriate profiles
 - **Email Generation**: > 95% coherent conversation threads with proper relationships
 - **Activity Generation**: > 90% realistic business progression sequences
+- **Case Generation**: > 90% industry-relevant support scenarios with proper case classification
+- **Knowledge Article Generation**: > 95% professional content with proper HTML formatting and structure
 
 ### **Business Value Metrics**
 - **Demo Effectiveness**: Improved prospect engagement with comprehensive, realistic business scenarios
@@ -409,7 +545,7 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 ### **Multi-Object Data Protection**
 - **No External Data**: All generated content stays within Salesforce across all data types
 - **Sharing Rules**: Inherits existing Account/Opportunity security for all generated records
-- **Field-Level Security**: Respects user permissions across Contact, EmailMessage, Task, and Event fields
+- **Field-Level Security**: Respects user permissions across Contact, EmailMessage, Task, Event, Case, and Knowledge Article fields
 - **Record-Level Security**: Generated data follows existing OWD and sharing model
 - **Audit Trail**: All generation activities logged through standard Salesforce tracking
 
@@ -417,7 +553,7 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 - **Content Filtering**: Business-appropriate language generation across all data types
 - **Data Masking**: No real customer data exposed to AI models
 - **Prompt Injection Protection**: Structured templates prevent malicious input across all workflows
-- **Usage Monitoring**: Track AI consumption and costs across contact, email, and activity generation
+- **Usage Monitoring**: Track AI consumption and costs across contact, email, activity, case, and knowledge article generation
 - **Cross-Pipeline Security**: Consistent security model across all data generation workflows
 
 ### **Compliance Considerations**
@@ -432,34 +568,54 @@ User Request → Data Type Detection → Processing Indicator → Success/Failur
 force-app/main/default/
 ├── flows/
 │   ├── Contact_Generator_Flow.flow-meta.xml
-│   └── AI_Email_Generator.flow-meta.xml
+│   ├── AI_Email_Generator.flow-meta.xml
+│   ├── Task_Event_Generator_Flow.flow-meta.xml
+│   ├── Case_Generator_Flow.flow-meta.xml
+│   └── Knowledge_Article_Generator_Flow.flow-meta.xml
 ├── classes/
 │   ├── ContactGenerator.cls
-│   └── EmailCreatorFromAI.cls
+│   ├── EmailCreatorFromAI.cls
+│   ├── TaskEventGenerator.cls
+│   ├── CaseGenerator.cls
+│   └── KnowledgeArticleGenerator.cls
 ├── genAiPromptTemplates/
 │   ├── Contact_Generator.genAiPromptTemplate-meta.xml
 │   ├── Generate_Email_Data_From_Request.genAiPromptTemplate-meta.xml
-│   └── Generate_Mock_Activity_Data.genAiPromptTemplate-meta.xml
-└── genAiPlugins/
-    ├── Mock_Contact_Generation.genAiPlugin-meta.xml
-    ├── Mock_Email_Generation.genAiPlugin-meta.xml
-    └── RFP_Analysis.genAiPlugin-meta.xml
+│   ├── Task_Event_Generator.genAiPromptTemplate-meta.xml
+│   ├── Case_Generator.genAiPromptTemplate-meta.xml
+│   └── Knowledge_Article_Generator.genAiPromptTemplate-meta.xml
+├── genAiPlugins/
+│   ├── Mock_Contact_Generation.genAiPlugin-meta.xml
+│   ├── Mock_Email_Generation.genAiPlugin-meta.xml
+│   ├── Mock_Task_Event_Generation.genAiPlugin-meta.xml
+│   ├── Mock_Case_Generation.genAiPlugin-meta.xml
+│   ├── Mock_Knowledge_Article_Generation.genAiPlugin-meta.xml
+│   └── RFP_Analysis.genAiPlugin-meta.xml
+└── genAiFunctions/
+    ├── Generate_Contact_Data/
+    ├── AI_Email_Generator/
+    ├── Generate_Task_Event_Data/
+    ├── Generate_Case_Data/
+    └── Generate_Knowledge_Article_Data/
 ```
 
 ### **Data Generation Capabilities**
 - **Contact Generation**: Realistic professional profiles with industry-specific roles
 - **Email Generation**: Coherent business communication threads with proper relationships
 - **Activity Generation**: Deal progression sequences with Tasks and Events
+- **Case Generation**: Industry-specific customer support scenarios with proper case management
+- **Knowledge Article Generation**: Professional knowledge base content with rich HTML formatting
 - **Cross-Object Integration**: Unified business narratives across all generated data
 
 ## 🚀 **Conclusion**
 
 This comprehensive Mock Data Generator Agent architecture delivers a robust, scalable solution that transforms simple natural language requests into rich, contextual mock data across multiple Salesforce objects. The system enhances demonstrations, training, and testing scenarios by providing:
 
-- **Complete Business Context**: Contacts, communications, and activities that tell coherent business stories
-- **Industry Awareness**: Content appropriate for specific business sectors and use cases  
-- **Scalable Architecture**: Modular design that can be extended to additional objects and use cases
-- **AI-Powered Intelligence**: Sophisticated content generation that creates realistic, professional data
-- **Salesforce Native**: Leverages platform capabilities for security, performance, and maintainability
+- **Complete Business Context**: Contacts, communications, activities, support cases, and knowledge articles that tell coherent business stories
+- **Industry Awareness**: Content appropriate for specific business sectors and use cases across all data types
+- **Customer Service Excellence**: Realistic support scenarios and professional knowledge base content
+- **Scalable Architecture**: Modular design with five specialized generation pipelines that can be extended to additional objects and use cases
+- **AI-Powered Intelligence**: Sophisticated content generation that creates realistic, professional data across contacts, emails, activities, cases, and knowledge articles
+- **Salesforce Native**: Leverages platform capabilities for security, performance, and maintainability across all standard objects
 
-The agent empowers teams across sales, marketing, development, and administration to work with realistic, comprehensive datasets that reflect authentic business scenarios, ultimately improving productivity and user experience across the Salesforce ecosystem.
+The agent empowers teams across sales, marketing, customer service, development, and administration to work with realistic, comprehensive datasets that reflect authentic business scenarios, ultimately improving productivity and user experience across the Salesforce ecosystem.

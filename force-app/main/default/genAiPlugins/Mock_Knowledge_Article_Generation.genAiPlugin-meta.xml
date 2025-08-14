@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>User requests to generate, create, or add mock knowledge articles, sample knowledge base content, demo support articles, or Knowledge Article records for customer service scenarios in any specified topic area or industry.</description>
+    <developerName>Mock_Knowledge_Article_Generation</developerName>
+    <genAiFunctions>
+        <functionName>Generate_Knowledge_Article_Data</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>When users request knowledge article generation for any topic area, always use the Generate_Knowledge_Article_Data action. Extract the topic area from context (e.g., "software support", "product troubleshooting", "user guides"), the number of articles from the user's request (e.g., "5 articles", "3 knowledge base entries"), and the industry type (e.g., "technology", "healthcare", "financial services"). Never attempt to create knowledge articles manually.</description>
+        <developerName>instruction_0_knowledge_article_generation</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_knowledge_article_generation</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user doesn't specify how many knowledge articles to generate, default to 5 articles. If no topic area is specified, ask the user to clarify what topic area or type of support content the articles should cover. Always confirm successful creation by stating the number of articles created and the topic area they cover.</description>
+        <developerName>instruction_1_knowledge_article_defaults</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_knowledge_article_defaults</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>For requests like "create knowledge articles", "generate support documentation", "add knowledge base content", "create FAQ articles", "generate troubleshooting guides", "make how-to articles", or "create customer service knowledge", immediately call Generate_Knowledge_Article_Data with the extracted topic area, article count, and specified industry.</description>
+        <developerName>instruction_2_knowledge_article_trigger_phrases</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_knowledge_article_trigger_phrases</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>The generated knowledge articles will include a mix of FAQ, How-To, Troubleshooting, and Best Practice article types with realistic titles, summaries, questions, answers, and proper categorization. Each article will have SEO-friendly URL names and appropriate data categories for the specified topic area and industry.</description>
+        <developerName>instruction_3_knowledge_article_details</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_knowledge_article_details</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Mock Knowledge Article Generation</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Generate realistic mock Knowledge Articles with AI-powered industry-relevant content for customer service and support scenarios. Create comprehensive knowledge base content including FAQ, How-To, Troubleshooting, and Best Practice articles for any specified topic area and industry for training, testing, and demonstration purposes.</scope>
+</GenAiPlugin>

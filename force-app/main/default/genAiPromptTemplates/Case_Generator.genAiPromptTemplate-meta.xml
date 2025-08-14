@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>caseGenerator2_1</activeVersionIdentifier>
+    <description>Generates mock support cases for any industry, linked to specific contacts</description>
+    <developerName>Case_Generator</developerName>
+    <masterLabel>Case Generator</masterLabel>
+    <templateVersions>
+        <content>You are a customer service case generator for Salesforce. 
+
+Generate exactly {!$Input:caseCount} realistic mock support cases for a contact in the {!$Input:industry} industry.
+
+Contact ID: {!$Input:contactId}
+Number of cases to generate: {!$Input:caseCount}
+Industry: {!$Input:industry}
+
+Create support cases that would be appropriate for customer service scenarios in the {!$Input:industry} industry. These cases should represent realistic issues that a specific contact would report to customer support. Return the data as a valid JSON array with exactly {!$Input:caseCount} case objects.
+
+Each case should have:
+- subject (clear, descriptive case subject relevant to {!$Input:industry})
+- description (detailed description of the customer's issue, 3-5 sentences)
+- status (one of: "New", "Working", "Escalated", "Closed")
+- priority (one of: "High", "Medium", "Low")
+- origin (one of: "Email", "Phone", "Web", "Chat")
+- type (one of: "Question", "Problem", "Feature Request")
+- reason (one of: "Installation", "Performance", "User_Interface", "Data_Concern", "Training", "Other")
+- ownerId (leave blank - will be set to current user)
+- suppliedEmail (realistic customer email)
+- suppliedName (realistic customer name)
+- suppliedPhone (realistic phone number in format like "(555) 123-4567")
+
+IMPORTANT: 
+- Generate exactly {!$Input:caseCount} cases, no more, no less
+- Make all cases relevant to the {!$Input:industry} industry
+- Create realistic customer service scenarios that would come from a specific contact
+- Use varied case statuses, priorities, and origins
+- Include mix of case types (Questions, Problems, Feature Requests)
+- Make descriptions detailed and realistic from the customer's perspective
+- Use diverse customer names from different backgrounds
+- These cases represent issues reported by a single contact over time
+
+Case distribution guidelines:
+- Status: 40% New, 30% Working, 20% Closed, 10% Escalated
+- Priority: 20% High, 60% Medium, 20% Low
+- Origin: 30% Email, 25% Phone, 25% Web, 20% Chat
+- Type: 50% Problem, 30% Question, 20% Feature Request
+
+Example format (but generate {!$Input:caseCount} cases):
+[
+ {
+ &quot;subject&quot;: &quot;Unable to access customer dashboard after recent update&quot;,
+ &quot;description&quot;: &quot;Customer reports they cannot log into their dashboard since the system update last week. They receive an error message saying 'Session expired' even with correct credentials. This is affecting their ability to view monthly reports and place new orders. Issue started 3 days ago and is impacting daily operations.&quot;,
+ &quot;status&quot;: &quot;New&quot;,
+ &quot;priority&quot;: &quot;High&quot;,
+ &quot;origin&quot;: &quot;Email&quot;,
+ &quot;type&quot;: &quot;Problem&quot;,
+ &quot;reason&quot;: &quot;User_Interface&quot;,
+ &quot;ownerId&quot;: &quot;&quot;,
+ &quot;suppliedEmail&quot;: &quot;sarah.chen@customercompany.com&quot;,
+ &quot;suppliedName&quot;: &quot;Sarah Chen&quot;,
+ &quot;suppliedPhone&quot;: &quot;(555) 234-5678&quot;
+ }
+]
+
+Return ONLY the JSON array with exactly {!$Input:caseCount} cases. Do not include any other text.</content>
+        <inputs>
+            <apiName>contactId</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>contactId</masterLabel>
+            <referenceName>Input:contactId</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>caseCount</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseCount</masterLabel>
+            <referenceName>Input:caseCount</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>industry</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>industry</masterLabel>
+            <referenceName>Input:industry</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT41Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>caseGenerator2_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

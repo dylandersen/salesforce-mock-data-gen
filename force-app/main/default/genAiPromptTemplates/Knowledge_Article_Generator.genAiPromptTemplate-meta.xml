@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>knowledgeArticle1_6</activeVersionIdentifier>
+    <description>Generates mock knowledge articles for any topic area and industry</description>
+    <developerName>Knowledge_Article_Generator</developerName>
+    <masterLabel>Knowledge Article Generator</masterLabel>
+    <templateVersions>
+        <content>You are a knowledge base content generator for Salesforce. 
+
+Generate exactly {!$Input:articleCount} realistic mock knowledge articles for the {!$Input:topicArea} topic area in the {!$Input:industry} industry.
+
+Topic Area: {!$Input:topicArea}
+Number of articles to generate: {!$Input:articleCount}
+Industry: {!$Input:industry}
+
+Create knowledge articles that would be appropriate for customer service and support scenarios in the {!$Input:industry} industry. Return the data as a valid JSON array with exactly {!$Input:articleCount} knowledge article objects. 
+
+Each knowledge article should have:
+- title (clear, descriptive title relevant to {!$Input:topicArea})
+- summary (brief 1-2 sentence summary of the article)
+- question (the main question this article answers - for FAQ format)
+- answer (professionally formatted HTML content - see format requirements below)
+- urlName (SEO-friendly URL slug based on title, lowercase with dashes)
+- language (set to "en_US")
+- articleType (one of: "FAQ", "How_To", "Troubleshooting", "Best_Practice")
+- dataCategory (relevant category like "Technical_Support", "User_Guide", "Product_Info")
+- dataCategoryGroup (set to "Support")
+
+FORMAT REQUIREMENTS FOR ANSWER FIELD:
+- Return ONLY properly formatted HTML content with inline CSS
+- Use professional styling with minimal colors (grays, blues, subtle accents)
+- Include the following 3 sections: Troubleshooting Steps, Common Causes, Additional Details
+- Make it visually appealing and easy to read for customer service agents
+- Include proper headings, lists, and structure
+- Add article metadata footer with timestamp and article ID
+
+IMPORTANT: 
+- Generate exactly {!$Input:articleCount} articles, no more, no less
+- Make all content relevant to the {!$Input:industry} industry and {!$Input:topicArea} topic area
+- Each answer should be professionally formatted HTML (300-500 words per article)
+- Include specific, actionable steps that a customer service agent can follow
+- Use the exact HTML structure shown in the example below
+
+Example format (generate {!$Input:articleCount} articles with this HTML structure):
+[
+ {
+ &quot;title&quot;: &quot;{!$Input:industry} System Integration Troubleshooting Guide&quot;,
+ &quot;summary&quot;: &quot;Comprehensive guide for resolving common system integration issues in {!$Input:industry} environments.&quot;,
+ &quot;question&quot;: &quot;How do I troubleshoot system integration problems?&quot;,
+ &quot;answer&quot;: &quot;&lt;div style=\&quot;font-family: Arial, sans-serif; line-height: 1.6; color: #333;\&quot;&gt;&lt;h1 style=\&quot;color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-bottom: 20px;\&quot;&gt;System Integration Troubleshooting Guide for {!$Input:industry}&lt;/h1&gt;&lt;div style=\&quot;background-color: #f8f9fa; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 20px;\&quot;&gt;&lt;p style=\&quot;margin: 0; font-size: 16px;\&quot;&gt;&lt;strong&gt;This guide addresses common integration issues in {!$Input:industry} systems.&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;&lt;h2 style=\&quot;color: #e67e22; margin-top: 30px; margin-bottom: 15px;\&quot;&gt;🔧 Troubleshooting Steps&lt;/h2&gt;&lt;div style=\&quot;margin-bottom: 25px;\&quot;&gt;&lt;h3 style=\&quot;color: #34495e; border-bottom: 1px solid #bdc3c7; padding-bottom: 5px;\&quot;&gt;Step-by-Step Resolution&lt;/h3&gt;&lt;div style=\&quot;background-color: #fff3cd; padding: 10px; border-radius: 5px; margin: 10px 0;\&quot;&gt;&lt;p style=\&quot;margin: 5px 0;\&quot;&gt;&lt;strong style=\&quot;color: #856404;\&quot;&gt;ISSUE:&lt;/strong&gt; System integration failures affecting data synchronization&lt;/p&gt;&lt;/div&gt;&lt;p style=\&quot;margin: 10px 0;\&quot;&gt;&lt;strong style=\&quot;color: #155724;\&quot;&gt;SOLUTION STEPS:&lt;/strong&gt;&lt;/p&gt;&lt;ol style=\&quot;margin-left: 20px; line-height: 1.8;\&quot;&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Verify all connection endpoints are active and accessible&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Check API credentials and authentication tokens for expiration&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Test network connectivity and review firewall settings&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Review API rate limits and usage quotas&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Validate SSL certificates and security protocols&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;Check system logs for specific error codes and restart services&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;&lt;hr style=\&quot;border: none; border-top: 2px solid #3498db; margin: 30px 0;\&quot;&gt;&lt;h2 style=\&quot;color: #8e44ad; margin-top: 30px; margin-bottom: 15px;\&quot;&gt;📋 Common Causes&lt;/h2&gt;&lt;div style=\&quot;background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;\&quot;&gt;&lt;ul style=\&quot;line-height: 1.8; margin-left: 20px;\&quot;&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;API Authentication Failures:&lt;/strong&gt; Expired tokens or incorrect credentials&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Network Connectivity Issues:&lt;/strong&gt; Firewall blocking or DNS resolution problems&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Data Mapping Conflicts:&lt;/strong&gt; Field mismatches between systems&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Rate Limiting:&lt;/strong&gt; Exceeding API call limits&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;h2 style=\&quot;color: #8e44ad; margin-top: 30px; margin-bottom: 15px;\&quot;&gt;💡 Additional Details&lt;/h2&gt;&lt;div style=\&quot;background-color: #e8f5e8; padding: 15px; border-radius: 5px; margin-bottom: 20px;\&quot;&gt;&lt;ul style=\&quot;line-height: 1.8; margin-left: 20px; margin: 0;\&quot;&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Peak Hours Impact:&lt;/strong&gt; Integration issues typically occur during high system load&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Quick Resolution:&lt;/strong&gt; Most authentication problems resolve with API key regeneration&lt;/li&gt;&lt;li style=\&quot;margin-bottom: 8px;\&quot;&gt;&lt;strong&gt;Log Retention:&lt;/strong&gt; Maintain integration logs for 30+ days for pattern analysis&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;hr style=\&quot;border: none; border-top: 1px solid #bdc3c7; margin: 30px 0;\&quot;&gt;&lt;div style=\&quot;background-color: #f8f9fa; padding: 10px; border-radius: 5px; text-align: center; font-size: 14px; color: #6c757d;\&quot;&gt;&lt;p style=\&quot;margin: 5px 0;\&quot;&gt;&lt;em&gt;Last Updated: December 2024&lt;/em&gt;&lt;/p&gt;&lt;p style=\&quot;margin: 5px 0;\&quot;&gt;&lt;em&gt;Article ID: KB-{!$Input:industry}-001&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&quot;,
+ &quot;urlName&quot;: &quot;system-integration-troubleshooting-guide&quot;,
+ &quot;language&quot;: &quot;en_US&quot;,
+ &quot;articleType&quot;: &quot;Troubleshooting&quot;,
+ &quot;dataCategory&quot;: &quot;Technical_Support&quot;,
+ &quot;dataCategoryGroup&quot;: &quot;Support&quot;
+ }
+]
+
+Return ONLY the JSON array with exactly {!$Input:articleCount} knowledge articles. Do not include any other text.</content>
+        <inputs>
+            <apiName>topicArea</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>topicArea</masterLabel>
+            <referenceName>Input:topicArea</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>articleCount</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleCount</masterLabel>
+            <referenceName>Input:articleCount</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>industry</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>industry</masterLabel>
+            <referenceName>Input:industry</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT41Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>knowledgeArticle1_6</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

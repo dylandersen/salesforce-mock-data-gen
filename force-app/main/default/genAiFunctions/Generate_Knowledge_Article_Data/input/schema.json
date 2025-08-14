@@ -1,0 +1,28 @@
+{
+  "required" : [ "topicArea", "articleCount", "industry" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "topicArea" : {
+      "title" : "topicArea",
+      "description" : "The topic area or subject matter for knowledge articles (e.g., 'software support', 'product troubleshooting', 'user guides', 'installation help'). Extract this from user phrases like 'software support articles', 'troubleshooting guides', 'customer service knowledge'.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "articleCount" : {
+      "title" : "articleCount",
+      "description" : "The number of knowledge articles to generate (e.g., 3, 5, 10). Extract this from user phrases like 'Generate 5 articles', 'Create 3 knowledge base entries', 'Make 8 support articles'.",
+      "lightning:type" : "lightning__numberType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "industry" : {
+      "title" : "industry",
+      "description" : "The industry type for generating relevant knowledge articles (e.g., 'technology', 'healthcare', 'financial services', 'retail', 'manufacturing', 'SaaS'). Extract this from user phrases like 'tech industry articles', 'healthcare support knowledge', 'fintech documentation'.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

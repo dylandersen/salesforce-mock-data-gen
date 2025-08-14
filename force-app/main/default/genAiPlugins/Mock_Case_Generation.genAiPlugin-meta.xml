@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>User requests to generate, create, or add mock support cases, sample service cases, demo case records, or Case records for customer service scenarios associated with specific Salesforce Contact records in any specified industry.</description>
+    <developerName>Mock_Case_Generation</developerName>
+    <genAiFunctions>
+        <functionName>Generate_Case_Data</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>When users request case generation for any contact, always use the Generate_Case_Data action. Extract the contact ID from context, the number of cases from the user's request (e.g., "5 cases", "3 support tickets"), and the industry type (e.g., "technology", "healthcare", "financial services"). Cases should be associated with specific contacts, not directly with accounts. Never attempt to create cases manually.</description>
+        <developerName>instruction_0_case_generation</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_case_generation</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user doesn't specify how many cases to generate, default to 4 cases. If no industry is specified, ask the user to clarify what industry the cases should be relevant to. Always confirm successful creation by stating the number of cases created and the contact they are associated with. Cases will automatically link to the contact's account through the contact relationship.</description>
+        <developerName>instruction_1_case_defaults</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_case_defaults</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>For requests like "create support cases", "generate customer service tickets", "add service cases for this contact", "create mock case data", "generate X cases for Y industry", "make support tickets for contact", or "create escalation scenarios", immediately call Generate_Case_Data with the current contact context, extracted case count, and specified industry.</description>
+        <developerName>instruction_2_case_trigger_phrases</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_case_trigger_phrases</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>The generated cases will include industry-relevant subjects and descriptions, realistic case statuses and priorities, varied origins (Email, Phone, Web, Chat), appropriate case types (Problem, Question, Feature Request), and supplier contact information. Each case will be automatically associated with the specified contact and inherit the account relationship from the contact. Cases represent realistic customer service scenarios from the contact's perspective.</description>
+        <developerName>instruction_3_case_details</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_case_details</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Mock Case Generation</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Generate realistic mock Support Cases with AI-powered industry-relevant content for Salesforce Contact records. Create professional customer service cases with appropriate subjects, descriptions, statuses, priorities, and contact information for any specified industry for testing, training, and demonstration purposes.</scope>
+</GenAiPlugin>

@@ -1,0 +1,28 @@
+{
+  "required" : [ "contactId", "caseCount", "industry" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "contactId" : {
+      "title" : "contactId",
+      "description" : "The Contact ID to generate support cases for. This should be extracted from the user's context or request. Cases will be linked to this contact and inherit the account relationship.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "caseCount" : {
+      "title" : "caseCount",
+      "description" : "The number of support cases to generate (e.g., 3, 5, 10). Extract this from user phrases like 'Generate 5 cases', 'Create 3 support tickets', 'Make 8 service cases'.",
+      "lightning:type" : "lightning__numberType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "industry" : {
+      "title" : "industry",
+      "description" : "The industry type for generating relevant support cases (e.g., 'technology', 'healthcare', 'financial services', 'retail', 'manufacturing', 'SaaS'). Extract this from user phrases like 'tech industry cases', 'healthcare support tickets', 'fintech service cases'.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
